@@ -86,13 +86,14 @@ def process_text(text):
 
 def remove_stopwords(word_counts):
     try:
-        # 使用原始字符串来表示路径，并确保使用正确的路径
-        stopwords_url = "https://raw.githubusercontent.com/jjlvoe/1111/master/stopwords.txt"
-        with open(stopwords_path, 'r', encoding='utf-8') as f:
-            stopwords = [line.strip() for line in f.readlines()]
+        # 停用词文件的GitHub URL
+        stopwords_url = "https://raw.githubusercontent.com/jjlvoe/1111/mster/stopwords.txt"
+        response = requests.get(stopwords_url)
+        response.raise_for_status()  # 确保请求成功
+        stopwords = response.text.splitlines()  # 将停用词按行分割
         return Counter({word: count for word, count in word_counts.items() if word not in stopwords})
-    except FileNotFoundError:
-        st.error("未找到停用词文件，将不去除停用词。")
+    except requests.RequestException as e:
+        st.error(f"请求停用词文件错误: {e}")
         return word_counts
 
 def filter_low_freq_words(word_counts, min_freq):
