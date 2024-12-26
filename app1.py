@@ -112,8 +112,8 @@ if url:
         st.error("无法获取文本内容，请检查URL或网络连接。")
     else:
         clean_text = clean_text(text)
-        st.subheader('清洁后的文本内容')
-        st.text_area('清洁后的文本内容', clean_text, height=300)
+        st.subheader('抓取的文本内容')
+        st.text_area('文本内容', clean_text, height=300)
 
         word_counts = process_text(clean_text)
         min_freq = st.sidebar.slider('设置最低词频阈值', 1, 100, 5)
