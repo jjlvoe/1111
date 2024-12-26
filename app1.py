@@ -87,7 +87,7 @@ def process_text(text):
 def remove_stopwords(word_counts):
     try:
         # 停用词文件的GitHub URL
-        stopwords_url = "https://raw.githubusercontent.com/jjlvoe/1111/mster/stopwords.txt"
+        stopwords_url = "https://raw.githubusercontent.com/jjlvoe/1111/master/stopwords.txt"
         response = requests.get(stopwords_url)
         response.raise_for_status()  # 确保请求成功
         stopwords = response.text.splitlines()  # 将停用词按行分割
